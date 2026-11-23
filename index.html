@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2e;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .caja {
+            background: #2b2b3c;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 320px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4f46e5;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="caja">
+        <h2>Calculadora</h2>
+        <input type="number" id="n1" min="-99999" max="99999" placeholder="Número 1 (-99999 a 99999)">
+        <input type="number" id="n2" min="-99999" max="99999" placeholder="Número 2 (-99999 a 99999)">
+
+        <div class="botones">
+            <button onclick="calcular('suma')">Sumar (+)</button>
+            <button onclick="calcular('resta')">Restar (-)</button>
+            <button onclick="calcular('multi')">Multiplicar (×)</button>
+            <button onclick="calcular('potencia')">Potencia (^)</button>
+        </div>
+
+        <div id="resultado">Resultado: -</div>
+    </div>
+
+    <script>
+        function calcular(op) {
+            const a = parseInt(document.getElementById('n1').value);
+            const b = parseInt(document.getElementById('n2').value);
+            const res = document.getElementById('resultado');
+
+            if (isNaN(a) || isNaN(b) || a < -99999 || a > 99999 || b < -99999 || b > 99999) {
+                res.innerText = "Error: Enteros entre -99999 y 99999";
+                return;
+            }
+
+            let total = 0;
+            if (op === 'suma') total = a + b;
+            if (op === 'resta') total = a - b;
+            if (op === 'multi') total = a * b;
+            if (op === 'potencia') total = Math.pow(a, b);
+
+            res.innerText = "Resultado: " + total;
+        }
+    </script>
+</body>
+
+</html>
